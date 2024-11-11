@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Prueba_IMC_Vidal</string>
+    <string name="mujer">Mujer</string>
+    <string name="hombre">Hombre</string>
+    <string name="altura">ALTURA</string>
+    <string name="_120_cm">120 cm</string>
+    <string name="edad">edad</string>
+    <string name="peso">peso</string>
+    <string name="calcular">calcular</string>
+    <string name="Resueltado">Tu Resultado:</string>
+    <string name="recalcular">RE-CALCULAR</string>
+    <string name="muydelgado">Muy Delgado</string>
+    <string name="estupendo">Estupendo</string>
+    <string name="sobrepeso">Sobre Peso</string>
+    <string name="muchosobrepeso">TOFFI</string>
+    <string name="comentario_delgado">Ve a por un bocata de Jamón.</string>
+    <string name="comentario_ideal">Estas hecho un pincel, mantente asi.</string>
+    <string name="comentario_sobrepeso">Tienes que cuidarte un poco, afloja con las cenas.</string>
+    <string name="comentario_muchosobrepeso">Es peligroso para tu salud, te tienes que cuidar más.</string>
+
+</resources>
