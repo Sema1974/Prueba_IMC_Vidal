@@ -12,7 +12,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.slider.Slider
+import com.google.android.material.slider.RangeSlider
 
 
 class IMCMainActivity : AppCompatActivity() {
@@ -20,7 +20,7 @@ class IMCMainActivity : AppCompatActivity() {
     private lateinit var viewMale:CardView
     private lateinit var viewFemale:CardView
     private lateinit var tvHeight:TextView
-    private lateinit var rsHeight:Slider
+    private lateinit var rsHeight: RangeSlider
     private lateinit var viewAge:TextView
     private lateinit var btnSubtractAge:FloatingActionButton
     private lateinit var btnAddAge:FloatingActionButton
@@ -31,7 +31,7 @@ class IMCMainActivity : AppCompatActivity() {
     private  var ageStart = 20
     private var weightStart = 60
     private var heightStart = 120
-    private var resultado = 0.0
+
 
     private fun initUI() {
         setGenderColor()
@@ -47,7 +47,12 @@ class IMCMainActivity : AppCompatActivity() {
             isMaleSelected = false
             setGenderColor()
         }
-        rsHeight.addOnChangeListener{_, value,_-> tvHeight.text=DecimalFormat("#.##").format(value) + " cm"}
+        rsHeight.addOnChangeListener{_, value,_ ->
+            val df = DecimalFormat("#.##")
+            heightStart = df.format(value).toInt()
+            tvHeight.text ="$heightStart"
+        }
+
         btnSubtractAge.setOnClickListener(){
             setAge(-1)
         }
@@ -91,8 +96,8 @@ class IMCMainActivity : AppCompatActivity() {
 
     }
     private fun calculateIMC(): Double{
-        val alturaMetro : Double = tvHeight.text.toString().replace(" cm", "").toDouble()/100
-        resultado = (weightStart.toDouble()/(alturaMetro*alturaMetro))
+        val df = DecimalFormat("#.##")
+        val resultado = weightStart/((heightStart.toDouble()/100)*(heightStart.toDouble()/100))
         return resultado
     }
     private fun navigate2result(imc : Double):String{
