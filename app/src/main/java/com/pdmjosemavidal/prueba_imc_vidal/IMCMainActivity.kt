@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.content.Intent
 import android.icu.text.DecimalFormat
+import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.cardview.widget.CardView
@@ -32,7 +33,9 @@ class IMCMainActivity : AppCompatActivity() {
     private var weightStart = 60
     private var heightStart = 120
 
-
+    companion object{
+        const val IMC_KEY = "IMC_RESULT"
+    }
     private fun initUI() {
         setGenderColor()
         setAge(0)
@@ -50,7 +53,8 @@ class IMCMainActivity : AppCompatActivity() {
         rsHeight.addOnChangeListener{_, value,_ ->
             val df = DecimalFormat("#.##")
             heightStart = df.format(value).toInt()
-            tvHeight.text ="$heightStart"
+            tvHeight.text ="$heightStart cm"
+
         }
 
         btnSubtractAge.setOnClickListener(){
@@ -67,7 +71,7 @@ class IMCMainActivity : AppCompatActivity() {
         }
         btnCalcular.setOnClickListener(){
             val intentGA = Intent(this, IMCResulActivity::class.java)
-            intentGA.putExtra("EXTRA_NAME", navigate2result(calculateIMC()))
+            intentGA.putExtra(IMC_KEY, navigate2result(calculateIMC()))
             startActivity(intentGA)
 
         }
@@ -93,15 +97,15 @@ class IMCMainActivity : AppCompatActivity() {
         btnSubtractWeight=findViewById(R.id.btnSubtractWeight)
         btnAddWeight=findViewById(R.id.btnAddWeight)
         btnCalcular=findViewById(R.id.botonCalcular)
+        tvHeight=findViewById(R.id.tvHeight)
 
     }
     private fun calculateIMC(): Double{
-        val df = DecimalFormat("#.##")
         val resultado = weightStart/((heightStart.toDouble()/100)*(heightStart.toDouble()/100))
         return resultado
     }
-    private fun navigate2result(imc : Double):String{
-        return imc.toString()
+    private fun navigate2result(imc : Double):Double{
+        return imc
     }
 
     private fun setGenderColor() {

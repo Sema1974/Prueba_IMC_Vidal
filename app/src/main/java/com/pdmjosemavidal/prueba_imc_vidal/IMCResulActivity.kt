@@ -1,5 +1,6 @@
 package com.pdmjosemavidal.prueba_imc_vidal
 
+import android.icu.text.DecimalFormat
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.appcompat.widget.AppCompatButton
+import com.pdmjosemavidal.prueba_imc_vidal.IMCMainActivity.Companion.IMC_KEY
 
 class IMCResulActivity : AppCompatActivity() {
     private lateinit var btnReCal: AppCompatButton
@@ -15,12 +17,14 @@ class IMCResulActivity : AppCompatActivity() {
     private lateinit var tvRes: TextView
     private lateinit var tvComentario: TextView
 
+
     private fun initListeners(){
         btnReCal.setOnClickListener(){
             finish()
         }
     }
     private fun mostrarResul(valorRel: Double){
+        tvRes.text = valorRel.toString()
         when(valorRel) {
             in 0.00..18.50 -> {
                 tvReFi.text = getString(R.string.muydelgado)
@@ -61,7 +65,7 @@ class IMCResulActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_imcresul)
 
-        val valorRel:Double = intent.extras?.getDouble("EXTRA_NAME") ?: -1.0
+        val valorRel = intent.extras?.getDouble(IMC_KEY) ?: -1.0
 
         initComponents()
         initListeners()
